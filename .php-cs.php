@@ -27,6 +27,8 @@ return $config
         'class_definition' => ['inline_constructor_arguments' => false, 'space_before_parenthesis' => true],
         // Remove extra spaces in a nullable type declaration.
         'compact_nullable_type_declaration' => true,
+        // Concatenation should be spaced according to configuration.
+        'concat_space' => ['spacing' => 'one'],
         // The PHP constants `true`, `false`, and `null` MUST be written using the correct casing.
         'constant_case' => true,
         // The body of each control structure MUST be enclosed within braces.
