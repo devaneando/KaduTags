@@ -9,12 +9,19 @@
         "ext-iconv": "*",
         "symfony/console": "6.3.*",
         "symfony/dotenv": "6.3.*",
+        "symfony/finder": "6.3.*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "6.3.*",
+        "symfony/property-access": "6.3.*",
         "symfony/runtime": "6.3.*",
+        "symfony/serializer": "6.3.*",
         "symfony/yaml": "6.3.*"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.35",
+        "squizlabs/php_codesniffer": "*",
+        "symfony/maker-bundle": "^1.51",
+        "symfony/phpunit-bridge": "^6.3"
     },
     "config": {
         "allow-plugins": {
