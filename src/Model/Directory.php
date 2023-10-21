@@ -30,9 +30,11 @@ class Directory
         return $this->path;
     }
 
-    public function setPath(string $path): void
+    public function setPath(string $path): self
     {
         $this->path = trim($path);
         $this->md5 = md5($this->path);
+
+        return $this;
     }
 }

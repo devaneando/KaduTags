@@ -10,6 +10,26 @@ class Tag
     private string $name;
     private ?string $description = null;
 
+    public static function slugify(string $text): string
+    {
+        $slugify = new Slugify();
+
+        return $slugify->slugify(trim($text));
+    }
+
+    public static function mbFirstCaseUpper(string $text): string
+    {
+        $text = trim($text);
+        if ('' === $text) {
+            return $text;
+        }
+
+        $firstChar = mb_substr($text, 0, 1);
+        $then = mb_substr($text, 1);
+
+        return mb_strtoupper($firstChar) . $then;
+    }
+
     public function __construct(string $name = null, string $description = null)
     {
         if (null !== $name) {
@@ -31,12 +51,12 @@ class Tag
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name): self
     {
-        $this->name = $this->mbFirstCaseUpper($name);
+        $this->name = static::mbFirstCaseUpper($name);
+        $this->slug = static::slugify($this->name);
 
-        $slugify = new Slugify();
-        $this->slug = $slugify->slugify($this->name);
+        return $this;
     }
 
     public function getDescription(): ?string
@@ -44,21 +64,10 @@ class Tag
         return $this->description;
     }
 
-    public function setDescription(?string $description): void
+    public function setDescription(?string $description): self
     {
         $this->description = null === $description ? null : $this->mbFirstCaseUpper($description);
-    }
 
-    private function mbFirstCaseUpper(string $text): string
-    {
-        $text = trim($text);
-        if ('' === $text) {
-            return $text;
-        }
-
-        $firstChar = mb_substr($text, 0, 1);
-        $then = mb_substr($text, 1);
-
-        return mb_strtoupper($firstChar) . $then;
+        return $this;
     }
 }
