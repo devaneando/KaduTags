@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\validation\Model;
+namespace App\Tests\Validation\Model;
 
 use App\Model\Directory;
 use App\Tests\Traits\TempFoldersTrait;

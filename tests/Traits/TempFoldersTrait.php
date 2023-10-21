@@ -2,6 +2,9 @@
 
 namespace App\Tests\Traits;
 
+use App\Model\Configuration;
+use App\Model\Directory;
+
 trait TempFoldersTrait
 {
     private function generateTempFolders(): array
@@ -54,6 +57,28 @@ trait TempFoldersTrait
         foreach ($files as $file) {
             if (file_exists($file)) {
                 unlink($file);
+            }
+        }
+    }
+
+    public function generateConfiguration(): Configuration
+    {
+        $config = new Configuration();
+        $folders = $this->generateTempFolders();
+        $temp = [];
+        foreach ($folders as $folder) {
+            $temp[] = new Directory($folder);
+        }
+        $config->setDirectories($temp);
+
+        return $config;
+    }
+
+    public function cleanConfiguration(Configuration $configuration): void
+    {
+        foreach ($configuration->getDirectories() as $folder) {
+            if (file_exists($folder->getPath())) {
+                rmdir($folder->getPath());
             }
         }
     }

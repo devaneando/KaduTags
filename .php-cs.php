@@ -9,6 +9,7 @@ $config = new PhpCsFixer\Config();
 return $config
     ->setRiskyAllowed(true)
     ->setRules([
+        '@PhpCsFixer' => false,
         // Each element of an array must be indented exactly once.
         'array_indentation' => true,
         // PHP arrays should be declared using the configured syntax.
@@ -107,6 +108,8 @@ return $config
         'no_trailing_whitespace_in_comment' => true,
         // There must be no trailing whitespace in strings.
         'no_trailing_whitespace_in_string' => true,
+        // Unused `use` statements must be removed.
+        'no_unused_imports' => false,
         // There should not be an empty `return` statement at the end of a function.
         'no_useless_return' => true,
         // There must be no `sprintf` calls with only the first argument.
