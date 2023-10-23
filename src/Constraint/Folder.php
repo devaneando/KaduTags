@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 class Folder extends Constraint
 {
-    public string $messageNotExistentFolder = 'The folder {{ string }} do not exist.';
+    public string $messageNotExistentFolder = 'The folder {{ string }} does not exist.';
     public string $messageIsNotFolder = '"{{ string }}" is not a folder.';
 
     // all configurable options must be passed to the constructor

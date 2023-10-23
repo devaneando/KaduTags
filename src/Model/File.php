@@ -2,12 +2,40 @@
 
 namespace App\Model;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class File
 {
+    public static function getExtensions(): array
+    {
+        return [
+            'doc',
+            'docx',
+            'odt',
+            'pdf',
+            'ppt',
+            'pptx',
+            'txt',
+            'xls',
+            'xlsx',
+        ];
+    }
+
+    #[Assert\NotBlank(message: 'The file must have a MD5 hash.')]
     private string $md5;
+    #[Assert\NotBlank(message: 'The file must have a path.')]
+    #[Assert\Regex('/^[^\/](.*)\/(.*)[^\/]$/', message: 'The file path is invalid.')]
     private string $path;
+    #[Assert\NotBlank(message: 'The file must have a basename.')]
     private string $basename;
+    #[Assert\NotBlank(message: 'The file must have a extension.')]
+    #[Assert\Choice(callback: 'getExtensions', message: 'The file type is invalid.')]
     private string $extension;
+
+    public function __construct(?string $path = null)
+    {
+        $this->setPath($path ?? '');
+    }
 
     public function getMd5(): string
     {
@@ -23,9 +51,9 @@ class File
     {
         $info = pathinfo(trim($path));
 
-        $this->path = $info['dirname'];
-        $this->basename = $info['basename'];
-        $this->extension = $info['extension'];
+        $this->path = $info['dirname'] ?? '';
+        $this->basename = $info['basename'] ?? '';
+        $this->extension = $info['extension'] ?? '';
         $this->md5 = md5($this->getFilename());
 
         return $this;

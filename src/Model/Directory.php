@@ -13,11 +13,9 @@ class Directory
     #[KaduAssert\Folder]
     private string $path;
 
-    public function __construct(string $path = null)
+    public function __construct(?string $path = null)
     {
-        if (null !== $path) {
-            $this->setPath($path);
-        }
+        $this->setPath($path ?? '');
     }
 
     public function getMd5(): string

@@ -2,8 +2,11 @@
 
 namespace App\Model;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class Configuration
 {
+    #[Assert\Valid()]
     /** @var Directory[] array */
     private array $directories;
 

@@ -3,11 +3,15 @@
 namespace App\Model;
 
 use Cocur\Slugify\Slugify;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class Tag
 {
+    #[Assert\NotBlank(message: 'The tag must have a slug.')]
     private string $slug;
+    #[Assert\NotBlank(message: 'The tag must have a name.')]
     private string $name;
+    #[Assert\NotBlank(message: 'The tag description cannot be an empty string.', allowNull: true)]
     private ?string $description = null;
 
     public static function slugify(string $text): string
@@ -30,11 +34,9 @@ class Tag
         return mb_strtoupper($firstChar) . $then;
     }
 
-    public function __construct(string $name = null, string $description = null)
+    public function __construct(?string $name = null, ?string $description = null)
     {
-        if (null !== $name) {
-            $this->setName($name);
-        }
+        $this->setName($name ?? '');
 
         if (null !== $description) {
             $this->setDescription($description);

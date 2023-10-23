@@ -35,9 +35,8 @@ class DirectoryTest extends KernelTestCase
     {
         $directory = new Directory();
         $errors = $this->validator->validate($directory);
-        $this->assertEquals(2, $errors->count());
-        $this->assertEquals('The folder must have a MD5 hash.', $errors->get(0)->getMessage());
-        $this->assertEquals('The folder must have a path.', $errors->get(1)->getMessage());
+        $this->assertEquals(1, $errors->count());
+        $this->assertEquals('The folder must have a path.', $errors->get(0)->getMessage());
     }
 
     public function testNotExistentFolder(): void
@@ -46,7 +45,7 @@ class DirectoryTest extends KernelTestCase
         $directory->setPath('lala');
         $errors = $this->validator->validate($directory);
         $this->assertEquals(2, $errors->count());
-        $this->assertEquals('The folder lala do not exist.', $errors->get(0)->getMessage());
+        $this->assertEquals('The folder lala does not exist.', $errors->get(0)->getMessage());
         $this->assertEquals('"lala" is not a folder.', $errors->get(1)->getMessage());
     }
 

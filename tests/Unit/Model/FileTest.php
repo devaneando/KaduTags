@@ -10,7 +10,7 @@ class FileTest extends TestCase
 {
     use TempFoldersTrait;
 
-    public function testLals(): void
+    public function testFile(): void
     {
         $tempFile = 'first' . DIRECTORY_SEPARATOR
             . 'second' . DIRECTORY_SEPARATOR
