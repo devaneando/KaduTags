@@ -12,6 +12,12 @@ class Tag
     #[Assert\NotBlank(message: 'The tag must have a name.')]
     private string $name;
     #[Assert\NotBlank(message: 'The tag description cannot be an empty string.', allowNull: true)]
+    #[Assert\Length(
+        min: 12,
+        max: 120,
+        minMessage: 'If you are setting a description it must be at least {{ limit }} characters long.',
+        maxMessage: 'If you are setting a description it cannot be longer than {{ limit }} characters long.',
+    )]
     private ?string $description = null;
 
     public static function slugify(string $text): string
@@ -34,7 +40,7 @@ class Tag
         return mb_strtoupper($firstChar) . $then;
     }
 
-    public function __construct(?string $name = null, ?string $description = null)
+    public function __construct(string $name = null, string $description = null)
     {
         $this->setName($name ?? '');
 

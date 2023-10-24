@@ -3,9 +3,10 @@
 namespace App\Constraint;
 
 use App\Constraint\Validator\FolderValidator;
+use Attribute;
 use Symfony\Component\Validator\Constraint;
 
-#[\Attribute]
+#[Attribute]
 class Folder extends Constraint
 {
     public string $messageNotExistentFolder = 'The folder {{ string }} does not exist.';

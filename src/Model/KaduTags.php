@@ -49,6 +49,8 @@ class KaduTags
         usort($this->tags, function (Tag $first, Tag $second) {
             return strcasecmp($first->getName(), $second->getName());
         });
+
+        return $this;
     }
 
     public function removeTag(Tag $tag): self
@@ -81,19 +83,7 @@ class KaduTags
 
     public function addFile(File $file): self
     {
-        if (-1 === $index = $this->indexOf($file)) {
-            return $this;
-        }
-
-        unset($this->files[$index]);
-        $this->files = array_values($this->files);
-
-        return $this;
-    }
-
-    public function removeFile(File $file): self
-    {
-        if (!$this->contains($file)) {
+        if ($this->contains($file)) {
             return $this;
         }
 
@@ -101,6 +91,18 @@ class KaduTags
         usort($this->files, function (File $first, File $second) {
             return strcasecmp($first->getMd5(), $second->getMd5());
         });
+
+        return $this;
+    }
+
+    public function removeFile(File $file): self
+    {
+        if (-1 === $index = $this->indexOf($file)) {
+            return $this;
+        }
+
+        unset($this->files[$index]);
+        $this->files = array_values($this->files);
 
         return $this;
     }

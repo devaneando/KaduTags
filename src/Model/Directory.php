@@ -13,7 +13,7 @@ class Directory
     #[KaduAssert\Folder]
     private string $path;
 
-    public function __construct(?string $path = null)
+    public function __construct(string $path = null)
     {
         $this->setPath($path ?? '');
     }

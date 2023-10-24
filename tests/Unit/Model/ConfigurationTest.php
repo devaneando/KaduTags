@@ -5,6 +5,7 @@ namespace App\Tests\Unit\Model;
 use App\Model\Configuration;
 use App\Model\Directory;
 use App\Tests\Traits\TempFoldersTrait;
+use Exception;
 use PHPUnit\Framework\TestCase;
 
 class ConfigurationTest extends TestCase
@@ -55,7 +56,7 @@ class ConfigurationTest extends TestCase
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function testGetDirectory(): void
     {
@@ -66,8 +67,8 @@ class ConfigurationTest extends TestCase
 
         try {
             $config->getDirectory(20);
-        } catch (\Exception $ex) {
-            $this->assertEquals(\Exception::class, get_class($ex));
+        } catch (Exception $ex) {
+            $this->assertEquals(Exception::class, $ex::class);
         }
 
         $this->cleanConfiguration($config);
@@ -117,7 +118,7 @@ class ConfigurationTest extends TestCase
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function testContains(): void
     {

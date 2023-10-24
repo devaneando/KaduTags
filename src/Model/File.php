@@ -32,7 +32,7 @@ class File
     #[Assert\Choice(callback: 'getExtensions', message: 'The file type is invalid.')]
     private string $extension;
 
-    public function __construct(?string $path = null)
+    public function __construct(string $path = null)
     {
         $this->setPath($path ?? '');
     }

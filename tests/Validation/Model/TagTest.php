@@ -38,7 +38,11 @@ class TagTest extends KernelTestCase
     {
         $tag = new Tag('This is a tag', '');
         $errors = $this->validator->validate($tag);
-        $this->assertEquals(1, $errors->count());
+        $this->assertEquals(2, $errors->count());
         $this->assertEquals('The tag description cannot be an empty string.', $errors->get(0)->getMessage());
+        $this->assertEquals(
+            'If you are setting a description it must be at least 12 characters long.',
+            $errors->get(1)->getMessage()
+        );
     }
 }
