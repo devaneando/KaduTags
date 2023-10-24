@@ -2,12 +2,13 @@
 
 namespace App\Model;
 
+use Exception;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class Configuration
 {
     #[Assert\Valid()]
-    /** @var Directory[] array */
+    /** @var Directory[] $directories */
     private array $directories;
 
     public function __construct()
@@ -21,12 +22,12 @@ class Configuration
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function getDirectory(int $index): Directory
     {
         if (null === $directory = $this->directories[$index] ?? null) {
-            throw new \Exception("No folder found with index #{$index}");
+            throw new Exception("No folder found with index #{$index}");
         }
 
         return $directory;
